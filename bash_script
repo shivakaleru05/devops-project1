@@ -1,0 +1,9 @@
+!#/bin/bash
+ec2-user
+sudo -i
+yum install httpd -y
+cd /var/www/html
+echo "hello devops" >index.html
+systemctl restarrt httpd
+
+
