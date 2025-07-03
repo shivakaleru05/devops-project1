@@ -1,0 +1,20 @@
+import pandas as pd
+import smtplib
+from email.message import EmailMessage
+
+# Read Excel file
+df = pd.read_excel("report.xlsx")
+
+# Create email message
+msg = EmailMessage()
+msg['Subject'] = 'Daily Report'
+msg['From'] = 'your_email@example.com'
+msg['To'] = 'recipient@example.com'
+msg.set_content(f"Report Summary:\n\n{df.head()}")
+
+# Send email (using Gmail SMTP)
+with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+    smtp.login('your_email@example.com', 'your_app_password')
+    smtp.send_message(msg)
+
+print("Email sent!")
